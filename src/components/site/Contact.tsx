@@ -64,9 +64,9 @@ export function Contact() {
         <Reveal delay={0.1}>
           <div className="grid gap-5">
             {[
-              { t: "Email", v: "hello@phoxstudio.com" },
-              { t: "WhatsApp", v: "+91 90000 00000" },
-              { t: "Studio", v: "Bengaluru, India — worldwide" },
+              { t: "Email", v: "phoxstudios@gmail.com" },
+              { t: "WhatsApp", v: "+91 7034606037, +91 9497159722" },
+              { t: "Studio", v: "Calicut, India — worldwide" },
             ].map(c => (
               <div key={c.t} className="rounded-2xl glass p-6">
                 <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{c.t}</div>
