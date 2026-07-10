@@ -1,7 +1,7 @@
 import { Reveal, SectionHeading } from "./Reveal";
 
 const plans = [
-  { name: "Starter", price: "4,999", tag: "Perfect for launches", features: ["Single Page", "Responsive", "Contact Form", "Basic SEO", "5-day delivery"] },
+  { name: "Starter", price: "9,999", tag: "Perfect for launches", features: ["Single Page", "Responsive", "Contact Form", "Basic SEO", "5-day delivery"] },
   { name: "Business", price: "14,999", tag: "Most requested", features: ["Up to 5 Pages", "Custom Design", "Branding", "Blog", "Analytics", "SEO"] },
   { name: "E-Commerce", price: "20,000", tag: "For online stores", features: ["Product Management", "Cart & Checkout", "Payment Gateway", "Shipping & Orders", "Fully Responsive"] },
   { name: "Premium", price: "25,000", tag: "Restaurants & hospitality", featured: true, features: ["Everything in E-commerce", "Digital Menu + QR Ordering", "Feedback System", "Reservations", "Loyalty Cards", "Analytics Dashboard", "WhatsApp Ordering", "Google Forms"] },
