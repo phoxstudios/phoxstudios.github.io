@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const steps = [
   { n: "01", t: "Discover", d: "Workshops, audits, and research to define the real problem." },
@@ -11,49 +10,71 @@ const steps = [
 ];
 
 export function Process() {
-  const wrap = useRef<HTMLDivElement>(null);
+  const section = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
+  const [distance, setDistance] = useState(0);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      if (!wrap.current || !track.current) return;
-      const distance = track.current.scrollWidth - window.innerWidth + 64;
-      gsap.to(track.current, {
-        x: -distance,
-        ease: "none",
-        scrollTrigger: {
-          trigger: wrap.current,
-          start: "top top",
-          end: () => `+=${distance}`,
-          pin: true,
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-    }, wrap);
-    return () => ctx.revert();
+    const measure = () => {
+      if (!track.current) return;
+      setDistance(Math.max(0, track.current.scrollWidth - window.innerWidth + 40));
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
   }, []);
 
+  const { scrollYProgress } = useScroll({
+    target: section,
+    offset: ["start start", "end end"],
+  });
+  const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
+
   return (
-    <section id="process" ref={wrap} className="relative overflow-hidden py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">— Process</p>
-        <h2 className="mt-4 font-display text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.05] tracking-tight">How we work.</h2>
-      </div>
-      <div ref={track} className="mt-16 flex gap-6 pl-6">
-        {steps.map((s) => (
-          <div key={s.n} className="relative min-w-[85vw] max-w-[520px] md:min-w-[520px] rounded-3xl glass p-10">
-            <div className="flex items-center gap-4">
-              <span className="font-display text-6xl font-bold text-gradient-gold">{s.n}</span>
-              <span className="h-px flex-1 bg-gradient-to-r from-gold/60 to-transparent" />
-            </div>
-            <h3 className="mt-8 font-display text-4xl font-semibold">{s.t}</h3>
-            <p className="mt-4 text-muted-foreground">{s.d}</p>
+    <section
+      id="process"
+      ref={section}
+      style={{ height: `calc(100vh + ${distance}px)` }}
+      className="relative"
+    >
+      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+        <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
+          <div className="flex items-center gap-3">
+            <span className="font-display text-sm font-medium text-primary tabular-nums">04</span>
+            <span className="text-xs font-medium uppercase tracking-[0.28em] text-muted-foreground">
+              Process
+            </span>
           </div>
-        ))}
-        <div className="min-w-[64px]" />
+          <h2 className="mt-6 font-display text-[clamp(2.25rem,6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
+            How we work.
+          </h2>
+        </div>
+
+        <motion.div ref={track} style={{ x }} className="mt-14 flex gap-6 px-6 md:px-10">
+          {steps.map((s) => (
+            <article
+              key={s.n}
+              className="flex min-h-[46vh] min-w-[85vw] flex-col justify-between rounded-[2rem] border border-border bg-card p-10 md:min-w-[30rem] md:p-12"
+            >
+              <div className="flex items-center gap-5">
+                <span className="font-display text-7xl font-semibold text-primary md:text-8xl">
+                  {s.n}
+                </span>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+              <div>
+                <h3 className="font-display text-4xl font-semibold md:text-5xl">{s.t}</h3>
+                <p
+                  className="mt-4 max-w-sm text-base leading-relaxed text-muted-foreground"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  {s.d}
+                </p>
+              </div>
+            </article>
+          ))}
+          <div className="min-w-[40px]" />
+        </motion.div>
       </div>
     </section>
   );

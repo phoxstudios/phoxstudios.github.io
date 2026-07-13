@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "PHOXSTUDIO — Designing Ideas Into Digital Success" },
       { name: "description", content: "PHOXSTUDIO is a premium digital agency crafting brand identity, web experiences, and cinematic digital products. Affordable. Creative. Reliable." },
       { name: "author", content: "PHOXSTUDIO" },
-      { name: "theme-color", content: "#0b0a09" },
+      { name: "theme-color", content: "#FFFBDD" },
       { property: "og:title", content: "PHOXSTUDIO — Designing Ideas Into Digital Success" },
       { property: "og:description", content: "PHOXSTUDIO is a premium digital agency crafting brand identity, web experiences, and cinematic digital products. Affordable. Creative. Reliable." },
       { property: "og:type", content: "website" },
@@ -91,6 +91,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a85a557c-672f-4f3a-a0e3-a41c459d8885/id-preview-25f1c479--23f628fa-258d-49bd-9f42-71f0339c915f.lovable.app-1783084995048.png" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.cdnfonts.com" },
+      { rel: "stylesheet", href: "https://fonts.cdnfonts.com/css/nohemi" },
       {
         rel: "stylesheet",
         href: appCss,

@@ -1,52 +1,84 @@
 import { useState } from "react";
-import { Reveal, SectionHeading } from "./Reveal";
+import { AnimatePresence, motion } from "framer-motion";
+import { SectionHeading } from "./Reveal";
 
 const items = [
-  { t: "Aureus Coffee", tag: "Brand", h: "row-span-2", grad: "from-amber-500/40 to-orange-700/30" },
-  { t: "Nova Finance", tag: "Web", h: "", grad: "from-yellow-500/30 to-amber-800/20" },
-  { t: "Palate Menu", tag: "Product", h: "", grad: "from-orange-400/40 to-yellow-600/30" },
-  { t: "Kaya Studio", tag: "Identity", h: "row-span-2", grad: "from-amber-400/40 to-red-700/30" },
-  { t: "Loop Wear", tag: "E-com", h: "", grad: "from-yellow-400/30 to-amber-700/20" },
-  { t: "Skyline Realty", tag: "Web", h: "", grad: "from-amber-300/30 to-orange-800/30" },
+  { t: "Aureus Coffee", tag: "Brand", year: "2025", img: "/work/aureus-coffee.png", span: "lg:col-span-7" },
+  { t: "Nova Finance", tag: "Web", year: "2025", img: "/work/nova-finance.png", span: "lg:col-span-5" },
+  { t: "Palate Menu", tag: "Product", year: "2024", img: "/work/palate-menu.png", span: "lg:col-span-5" },
+  { t: "Kaya Studio", tag: "Identity", year: "2025", img: "/work/kaya-studio.png", span: "lg:col-span-7" },
+  { t: "Loop Wear", tag: "E-com", year: "2024", img: "/work/loop-wear.png", span: "lg:col-span-6" },
+  { t: "Skyline Realty", tag: "Web", year: "2024", img: "/work/skyline-realty.png", span: "lg:col-span-6" },
 ];
+
 const filters = ["All", "Brand", "Web", "Product", "Identity", "E-com"];
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function Portfolio() {
   const [f, setF] = useState("All");
-  const visible = items.filter(i => f === "All" || i.tag === f);
+  const visible = items.filter((i) => f === "All" || i.tag === f);
+
   return (
-    <section id="work" className="relative py-32 px-6">
-      <SectionHeading eyebrow="Selected work" title="Recent obsessions." />
-      <div className="mx-auto mt-10 flex max-w-6xl flex-wrap items-center justify-center gap-2">
-        {filters.map(name => (
-          <button
-            key={name}
-            onClick={() => setF(name)}
-            className={`rounded-full px-4 py-2 text-xs uppercase tracking-widest transition-all ${
-              f === name ? "bg-gold text-ink glow-gold" : "glass text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {name}
-          </button>
-        ))}
-      </div>
-      <div className="mx-auto mt-12 grid max-w-7xl auto-rows-[220px] grid-cols-2 gap-4 md:grid-cols-3">
-        {visible.map((it, i) => (
-          <Reveal key={it.t + f} delay={(i % 3) * 0.08} className={it.h}>
-            <a href="#" className={`group relative block h-full overflow-hidden rounded-3xl glass`}>
-              <div className={`absolute inset-0 bg-gradient-to-br ${it.grad}`} />
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><defs><pattern id=%22p%22 width=%2240%22 height=%2240%22 patternUnits=%22userSpaceOnUse%22><path d=%22M0 40L40 0%22 stroke=%22white%22 stroke-opacity=%220.05%22/></pattern></defs><rect width=%22100%25%22 height=%22100%25%22 fill=%22url(%23p)%22/></svg>')]" />
-              <div className="absolute inset-0 flex items-end justify-between p-6 transition-transform duration-500 group-hover:scale-[1.02]">
-                <div>
-                  <p className="text-[10px] uppercase tracking-widest text-white/60">{it.tag}</p>
-                  <h3 className="mt-1 font-display text-xl font-semibold">{it.t}</h3>
+    <section id="work" className="relative px-6 py-32 md:px-10 md:py-44">
+      <div className="mx-auto max-w-[1400px]">
+        <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+          <SectionHeading index="03" eyebrow="Selected work" title="Recent obsessions." />
+          <div className="flex flex-wrap gap-2">
+            {filters.map((name) => (
+              <button
+                key={name}
+                onClick={() => setF(name)}
+                className={`rounded-full border px-5 py-2.5 text-xs font-medium uppercase tracking-[0.16em] transition-colors ${
+                  f === name
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border text-muted-foreground hover:border-foreground/40 hover:text-foreground"
+                }`}
+              >
+                {name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <motion.div layout className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-12">
+          <AnimatePresence mode="popLayout">
+            {visible.map((it) => (
+              <motion.a
+                layout
+                key={it.t}
+                href="#contact"
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.6, ease: EASE }}
+                className={`group relative block overflow-hidden rounded-[2rem] bg-card ${it.span}`}
+              >
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={it.img || "/placeholder.svg"}
+                    alt={`${it.t} — ${it.tag} project by Phox Studio`}
+                    className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500 group-hover:bg-foreground/10" />
                 </div>
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-gold text-ink opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0">→</span>
-              </div>
-              <div className="pointer-events-none absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </a>
-          </Reveal>
-        ))}
+                <div className="flex items-end justify-between p-6 md:p-7">
+                  <div>
+                    <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                      <span>{it.tag}</span>
+                      <span className="h-1 w-1 rounded-full bg-primary" />
+                      <span>{it.year}</span>
+                    </div>
+                    <h3 className="mt-2 font-display text-2xl font-semibold md:text-3xl">{it.t}</h3>
+                  </div>
+                  <span className="grid h-12 w-12 flex-none place-items-center rounded-full border border-foreground/20 text-foreground transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+                    →
+                  </span>
+                </div>
+              </motion.a>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
