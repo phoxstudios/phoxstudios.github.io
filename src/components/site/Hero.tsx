@@ -5,7 +5,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const lines = [
   [{ t: "Designing", accent: false }, { t: "ideas", accent: true }],
   [{ t: "into digital", accent: false }],
-  [{ t: "success", accent: true }],
+  [{ t: "success.", accent: true }],
 ];
 
 const stats = [
