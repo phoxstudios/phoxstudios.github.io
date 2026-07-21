@@ -10,6 +10,7 @@ import { Process } from "../components/site/Process";
 import { Pricing } from "../components/site/Pricing";
 import { Restaurant } from "../components/site/Restaurant";
 import { Testimonials } from "../components/site/Testimonials";
+import { FAQ } from "../components/site/FAQ";
 import { Contact } from "../components/site/Contact";
 import { Footer } from "../components/site/Footer";
 
@@ -32,6 +33,7 @@ function Index() {
         <Pricing />
         <Restaurant />
         <Testimonials />
+        <FAQ />
         <Contact />
       </main>
       <Footer />

@@ -1,37 +1,73 @@
+import { ArrowUp } from "lucide-react";
+
+const columns = [
+  { t: "Studio", l: ["About", "Work", "Process", "Contact"] },
+  { t: "Services", l: ["Brand Identity", "Web Development", "E-Commerce", "Marketing"] },
+  { t: "Elsewhere", l: ["Instagram", "Behance", "Dribbble", "LinkedIn"] },
+];
+
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/5 px-6 py-16">
-      <div className="pointer-events-none absolute inset-x-0 -top-40 h-80 bg-[radial-gradient(ellipse_at_center,color-mix(in_oklab,var(--gold)_20%,transparent),transparent_70%)]" />
-      <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-4">
-        <div>
-          <div className="flex items-center gap-2 text-lg font-bold">
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-gold text-ink font-black">P</span>
-            <span>PHOX<span className="text-gradient-gold">STUDIO</span></span>
+    <footer className="relative overflow-hidden bg-foreground px-6 pt-20 pb-10 text-background md:px-10">
+      <div className="mx-auto max-w-[1400px]">
+        <div className="grid gap-12 md:grid-cols-4">
+          <div className="md:col-span-1">
+            <div className="flex items-baseline gap-0.5 text-2xl font-semibold">
+              <span className="font-display text-primary">phox</span>
+              <span className="font-display text-background">studio</span>
+            </div>
+            <p
+              className="mt-5 max-w-xs text-sm leading-relaxed text-background/60"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              Designing ideas into digital success — together. A premium branding &amp; digital
+              design studio in Kerala, India.
+            </p>
           </div>
-          <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-            Designing ideas into digital success — together.
-          </p>
+          {columns.map((col) => (
+            <div key={col.t}>
+              <div className="text-xs uppercase tracking-[0.22em] text-background/40">{col.t}</div>
+              <ul className="mt-5 space-y-3 text-sm" style={{ fontFamily: "var(--font-body)" }}>
+                {col.l.map((item) => (
+                  <li key={item}>
+                    <a
+                      href="#"
+                      className="text-background/80 transition-colors hover:text-primary"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-        {[
-          { t: "Studio", l: ["About", "Work", "Process", "Contact"] },
-          { t: "Services", l: ["Brand Identity", "Web Development", "E-Commerce", "Marketing"] },
-          { t: "Elsewhere", l: ["Instagram", "Behance", "Dribbble", "LinkedIn"] },
-        ].map(col => (
-          <div key={col.t}>
-            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{col.t}</div>
-            <ul className="mt-4 space-y-2 text-sm">
-              {col.l.map(item => (
-                <li key={item}><a href="#" className="text-foreground/80 transition-colors hover:text-gold">{item}</a></li>
-              ))}
-            </ul>
+
+        {/* Oversized wordmark */}
+        <div className="mt-20 border-t border-background/10 pt-10">
+          <div className="flex items-center justify-between">
+            <span className="text-xs uppercase tracking-[0.22em] text-background/40">
+              Est. 2018 — Kerala, India
+            </span>
+            <a
+              href="#top"
+              className="group inline-flex items-center gap-2 text-sm text-background/80 transition-colors hover:text-primary"
+            >
+              Back to top
+              <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-1" />
+            </a>
           </div>
-        ))}
-      </div>
-      <div className="mx-auto mt-14 flex max-w-7xl flex-col items-center justify-between gap-6 border-t border-white/5 pt-8 text-xs text-muted-foreground md:flex-row">
-        <div>© {new Date().getFullYear()} PHOXSTUDIO. All rights reserved.</div>
-        <a href="#top" className="inline-flex items-center gap-2 text-gold transition-transform hover:-translate-y-0.5">
-          Back to top ↑
-        </a>
+          <div className="mt-8 select-none font-display text-[clamp(3.5rem,18vw,17rem)] font-semibold leading-[0.8] tracking-[-0.04em]">
+            <span className="text-primary">phox</span>
+            <span className="text-background">studio</span>
+          </div>
+          <div
+            className="mt-8 text-xs text-background/40"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            © {new Date().getFullYear()} Phox Studio. All rights reserved.
+          </div>
+        </div>
       </div>
     </footer>
   );
