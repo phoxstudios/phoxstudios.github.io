@@ -18,21 +18,23 @@ export function About() {
         </div>
 
         <div className="mt-10 grid gap-14 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
-          <div className="overflow-hidden">
+          <h2 className="overflow-hidden">
             <RevealText
               text="A studio built for founders who care about the details."
               className="block font-display text-[clamp(2.25rem,5.5vw,4.75rem)] font-semibold leading-[0.98] tracking-[-0.03em] text-balance"
             />
-          </div>
+          </h2>
           <div className="flex flex-col justify-end">
             <Reveal delay={0.1}>
               <p
                 className="text-base leading-relaxed text-muted-foreground md:text-lg"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                We fuse strategy, design, and engineering into digital products that feel
-                effortless — and perform relentlessly. Our process blends deep research with
-                creative exploration so your identity looks premium and aligns with your goals.
+                Based in Calicut (Kozhikode), Kerala, we fuse strategy, design, and engineering
+                into digital products that feel effortless — and perform relentlessly. From brand
+                identity and web design to e-commerce and digital marketing, our process blends
+                deep research with creative exploration so your identity looks premium and aligns
+                with your goals.
               </p>
             </Reveal>
           </div>

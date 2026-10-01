@@ -39,7 +39,7 @@ export function Restaurant() {
                   <div className="mt-7 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                     Aureus Bistro
                   </div>
-                  <h4 className="mt-1 font-display text-3xl font-semibold">Menu</h4>
+                  <div className="mt-1 font-display text-3xl font-semibold">Menu</div>
                   <div className="mt-6 grid gap-3">
                     {["Truffle Pasta", "Wagyu Slider", "Saffron Risotto"].map((n, i) => (
                       <div
@@ -77,7 +77,7 @@ export function Restaurant() {
                   <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                     <p.Icon className="h-5 w-5" strokeWidth={1.75} />
                   </div>
-                  <h4 className="mt-5 font-display text-lg font-semibold">{p.t}</h4>
+                  <h3 className="mt-5 font-display text-lg font-semibold">{p.t}</h3>
                   <p
                     className="mt-1.5 text-sm leading-relaxed text-muted-foreground"
                     style={{ fontFamily: "var(--font-body)" }}

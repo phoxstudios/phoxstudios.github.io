@@ -11,6 +11,15 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import {
+  HOME_TITLE,
+  OG_IMAGE_URL,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  localBusinessSchema,
+  organizationSchema,
+  webSiteSchema,
+} from "../lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -77,18 +86,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "PHOXSTUDIO — Designing Ideas Into Digital Success" },
-      { name: "description", content: "PHOXSTUDIO is a premium digital agency crafting brand identity, web experiences, and cinematic digital products. Affordable. Creative. Reliable." },
-      { name: "author", content: "PHOXSTUDIO" },
+      { title: HOME_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
+      { name: "author", content: SITE_NAME },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       { name: "theme-color", content: "#FFFBDD" },
-      { property: "og:title", content: "PHOXSTUDIO — Designing Ideas Into Digital Success" },
-      { property: "og:description", content: "PHOXSTUDIO is a premium digital agency crafting brand identity, web experiences, and cinematic digital products. Affordable. Creative. Reliable." },
+      { property: "og:title", content: HOME_TITLE },
+      { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: SITE_NAME },
+      { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "PHOXSTUDIO — Designing Ideas Into Digital Success" },
-      { name: "twitter:description", content: "PHOXSTUDIO is a premium digital agency crafting brand identity, web experiences, and cinematic digital products. Affordable. Creative. Reliable." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a85a557c-672f-4f3a-a0e3-a41c459d8885/id-preview-25f1c479--23f628fa-258d-49bd-9f42-71f0339c915f.lovable.app-1783084995048.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a85a557c-672f-4f3a-a0e3-a41c459d8885/id-preview-25f1c479--23f628fa-258d-49bd-9f42-71f0339c915f.lovable.app-1783084995048.png" },
+      { name: "twitter:title", content: HOME_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+      { name: "twitter:image", content: OG_IMAGE_URL },
+      /* Global structured data — Organization, LocalBusiness, WebSite.
+       * Page-level WebPage/Breadcrumb/Service/FAQ JSON-LD is added per route. */
+      { "script:ld+json": organizationSchema() },
+      { "script:ld+json": localBusinessSchema() },
+      { "script:ld+json": webSiteSchema() },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.cdnfonts.com" },
@@ -97,7 +113,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.png", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/favicon.png" },
     ],
   }),
   shellComponent: RootShell,

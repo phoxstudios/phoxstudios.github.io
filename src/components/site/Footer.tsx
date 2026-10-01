@@ -1,10 +1,47 @@
 import { ArrowUp } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { lenisRef } from "./SmoothScroll";
 
-const columns = [
-  { t: "Studio", l: ["About", "Work", "Process", "Contact"] },
-  { t: "Services", l: ["Brand Identity", "Web Development", "E-Commerce", "Marketing"] },
-  { t: "Elsewhere", l: ["Instagram", "Behance", "Dribbble", "LinkedIn"] },
+const columns: Array<{
+  t: string;
+  l: Array<{ label: string; to?: string; href?: string }>;
+}> = [
+  {
+    t: "Studio",
+    l: [
+      { label: "About", to: "/about" },
+      { label: "Work", to: "/work" },
+      { label: "Process", to: "/process" },
+      { label: "Contact", to: "/contact" },
+    ],
+  },
+  {
+    t: "Services",
+    l: [
+      { label: "Brand Identity", to: "/services" },
+      { label: "Web Development", to: "/services" },
+      { label: "E-Commerce", to: "/services" },
+      { label: "Marketing", to: "/services" },
+    ],
+  },
+  {
+    t: "Elsewhere",
+    l: [
+      { label: "WhatsApp", href: "https://wa.me/917034606037" },
+      { label: "Email", href: "mailto:phoxstudios@gmail.com" },
+      // Social profiles — add real URLs here when available.
+      { label: "Instagram" },
+      { label: "Behance" },
+      { label: "Dribbble" },
+      { label: "LinkedIn" },
+    ],
+  },
 ];
+
+function backToTop() {
+  if (lenisRef.current) lenisRef.current.scrollTo(0, { duration: 1.2 });
+  else window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
 export function Footer() {
   return (
@@ -12,10 +49,10 @@ export function Footer() {
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
-            <div className="flex items-baseline gap-0.5 text-2xl font-semibold">
+            <Link to="/" className="flex items-baseline gap-0.5 text-2xl font-semibold">
               <span className="font-display text-primary">phox</span>
               <span className="font-display text-background">studio</span>
-            </div>
+            </Link>
             <p
               className="mt-5 max-w-xs text-sm leading-relaxed text-background/60"
               style={{ fontFamily: "var(--font-body)" }}
@@ -29,13 +66,25 @@ export function Footer() {
               <div className="text-xs uppercase tracking-[0.22em] text-background/40">{col.t}</div>
               <ul className="mt-5 space-y-3 text-sm" style={{ fontFamily: "var(--font-body)" }}>
                 {col.l.map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="text-background/80 transition-colors hover:text-primary"
-                    >
-                      {item}
-                    </a>
+                  <li key={item.label}>
+                    {item.to ? (
+                      <Link
+                        to={item.to}
+                        preload="intent"
+                        className="text-background/80 transition-colors hover:text-primary"
+                      >
+                        {item.label}
+                      </Link>
+                    ) : item.href ? (
+                      <a
+                        href={item.href}
+                        className="text-background/80 transition-colors hover:text-primary"
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <span className="text-background/40">{item.label}</span>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -49,13 +98,14 @@ export function Footer() {
             <span className="text-xs uppercase tracking-[0.22em] text-background/40">
               Est. 2018 — Kerala, India
             </span>
-            <a
-              href="#top"
+            <button
+              type="button"
+              onClick={backToTop}
               className="group inline-flex items-center gap-2 text-sm text-background/80 transition-colors hover:text-primary"
             >
               Back to top
               <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-1" />
-            </a>
+            </button>
           </div>
           <div className="mt-8 select-none font-display text-[clamp(3.5rem,18vw,17rem)] font-semibold leading-[0.8] tracking-[-0.04em]">
             <span className="text-primary">phox</span>

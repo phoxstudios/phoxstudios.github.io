@@ -1,5 +1,6 @@
 import { Reveal, SectionHeading } from "./Reveal";
 import { Check } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const plans = [
   { name: "Starter", price: "9,999", tag: "Perfect for launches", features: ["Single Page", "Responsive", "Contact Form", "Basic SEO", "5-day delivery"] },
@@ -69,8 +70,8 @@ export function Pricing() {
                   ))}
                 </ul>
 
-                <a
-                  href="#contact"
+                <Link
+                  to="/contact"
                   data-magnetic
                   className={`mt-8 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-medium transition-transform hover:scale-[1.03] ${
                     p.featured
@@ -79,7 +80,7 @@ export function Pricing() {
                   }`}
                 >
                   Choose {p.name} →
-                </a>
+                </Link>
               </article>
             </Reveal>
           ))}

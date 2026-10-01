@@ -2,29 +2,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { SectionHeading, Reveal } from "./Reveal";
+import { FAQS } from "../../lib/seo";
 
-const faqs = [
-  {
-    q: "How long does a typical project take?",
-    a: "Most brand and website projects ship in 2–4 weeks depending on scope. We agree on a fixed timeline up front and deliver on the exact promised day.",
-  },
-  {
-    q: "Do you work with clients outside India?",
-    a: "Yes. We're based in Calicut, Kerala, and collaborate with founders worldwide. Async-first communication keeps timezones from slowing us down.",
-  },
-  {
-    q: "What's included in a brand identity package?",
-    a: "A complete visual system — logo, color palette, typography, tone of voice, and usage guidelines — designed with strategic clarity so your brand is instantly recognizable.",
-  },
-  {
-    q: "Can you handle both design and development?",
-    a: "Absolutely. We fuse strategy, design, and engineering in-house, so your prototype translates 1:1 to a fast, accessible, SEO-ready build.",
-  },
-  {
-    q: "How does pricing work?",
-    a: "We offer transparent, fixed-price packages with clear deliverables. For custom scope, we scope a tailored proposal after a short discovery call.",
-  },
-];
+const faqs = FAQS;
 
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);

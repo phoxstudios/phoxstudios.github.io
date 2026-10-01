@@ -12,7 +12,7 @@ const loop = [...items, ...items];
 
 export function Testimonials() {
   return (
-    <section className="relative overflow-hidden py-32 md:py-44">
+    <section id="testimonials" className="relative overflow-hidden py-32 md:py-44">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <SectionHeading index="07" eyebrow="Testimonials" title="Loved by ambitious teams." />
       </div>

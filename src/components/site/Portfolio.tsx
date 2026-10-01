@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import { SectionHeading } from "./Reveal";
+
+const MotionLink = motion.create(Link);
 
 const items = [
   { t: "Aureus Coffee", tag: "Brand", year: "2025", img: "/work/aureus-coffee.png", span: "lg:col-span-7" },
@@ -43,10 +46,10 @@ export function Portfolio() {
         <motion.div layout className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-12">
           <AnimatePresence mode="popLayout">
             {visible.map((it) => (
-              <motion.a
+              <MotionLink
                 layout
                 key={it.t}
-                href="#contact"
+                to="/contact"
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
@@ -75,7 +78,7 @@ export function Portfolio() {
                     →
                   </span>
                 </div>
-              </motion.a>
+              </MotionLink>
             ))}
           </AnimatePresence>
         </motion.div>

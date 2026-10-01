@@ -1,42 +1,30 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SmoothScroll } from "../components/site/SmoothScroll";
-import { CustomCursor } from "../components/site/CustomCursor";
-import { Nav } from "../components/site/Nav";
-import { Hero } from "../components/site/Hero";
-import { About } from "../components/site/About";
-import { Services } from "../components/site/Services";
-import { Portfolio } from "../components/site/Portfolio";
-import { Process } from "../components/site/Process";
-import { Pricing } from "../components/site/Pricing";
-import { Restaurant } from "../components/site/Restaurant";
-import { Testimonials } from "../components/site/Testimonials";
-import { FAQ } from "../components/site/FAQ";
-import { Contact } from "../components/site/Contact";
-import { Footer } from "../components/site/Footer";
+import { SitePage } from "../components/site/SitePage";
+import {
+  HOME_TITLE,
+  SITE_DESCRIPTION,
+  canonicalLink,
+  faqSchema,
+  socialMeta,
+} from "../lib/seo";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: HOME_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
+      ...socialMeta({
+        title: HOME_TITLE,
+        description: SITE_DESCRIPTION,
+        path: "/",
+      }),
+      { "script:ld+json": faqSchema() },
+    ],
+    links: [canonicalLink("/")],
+  }),
   component: Index,
 });
 
 function Index() {
-  return (
-    <div className="relative bg-background text-foreground">
-      <SmoothScroll />
-      <CustomCursor />
-      <Nav />
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Portfolio />
-        <Process />
-        <Pricing />
-        <Restaurant />
-        <Testimonials />
-        <FAQ />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
-  );
+  return <SitePage />;
 }

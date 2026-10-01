@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -70,8 +71,8 @@ export function Hero() {
           transition={{ duration: 0.8, ease: EASE, delay: 0.9 }}
           className="flex flex-wrap items-center gap-4"
         >
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             data-magnetic
             className="group inline-flex items-center gap-3 rounded-full bg-primary px-8 py-4 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.03]"
           >
@@ -79,9 +80,9 @@ export function Hero() {
             <span aria-hidden className="transition-transform group-hover:translate-x-1">
               →
             </span>
-          </a>
-          <a
-            href="#work"
+          </Link>
+          <Link
+            to="/work"
             data-magnetic
             className="group inline-flex items-center gap-3 rounded-full border border-foreground/20 px-8 py-4 text-sm font-medium text-foreground transition-colors hover:bg-foreground hover:text-background"
           >
@@ -89,7 +90,7 @@ export function Hero() {
               ▶
             </span>
             View our work
-          </a>
+          </Link>
         </motion.div>
 
         <motion.p

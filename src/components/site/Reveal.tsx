@@ -96,12 +96,12 @@ export function SectionHeading({
           </span>
         </div>
       </Reveal>
-      <div className="mt-6 overflow-hidden">
+      <h2 className="mt-6 overflow-hidden">
         <RevealText
           text={title}
           className="block font-display text-[clamp(2.25rem,6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-balance text-foreground"
         />
-      </div>
+      </h2>
       {sub && (
         <Reveal delay={0.15}>
           <p

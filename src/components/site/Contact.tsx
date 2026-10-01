@@ -28,12 +28,12 @@ export function Contact() {
             Contact
           </span>
         </div>
-        <div className="mt-8 overflow-hidden">
+        <h2 className="mt-8 overflow-hidden">
           <RevealText
             text="Let's build something remarkable."
             className="block max-w-4xl font-display text-[clamp(2.5rem,8vw,6.5rem)] font-semibold leading-[0.92] tracking-[-0.03em]"
           />
-        </div>
+        </h2>
 
         <div className="mt-20 grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
           {/* Form */}
